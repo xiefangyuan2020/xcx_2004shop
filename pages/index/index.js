@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   data: {
     motto: 'Hello World',
+    name: 'huahua',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -16,6 +17,27 @@ Page({
     })
   },
   onLoad: function () {
+    let _this = (this);
+    //发起网络请求
+    wx.request({
+      url: 'http://shop.2004.com/api/test', 
+      data: {
+        x: 'xxxx',
+        y: 'yyyy'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        console.log(res)
+        _this.setData({
+          obj: res.data.name,
+          tt: res.data.age
+        })
+      }
+    })
+
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
